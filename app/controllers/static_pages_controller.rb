@@ -32,12 +32,12 @@ class StaticPagesController < ApplicationController
         doc = Nokogiri::HTML.parse(page_source,nil)
         doc.css("table.blue_table > tr").each do |elem|
           elem.css("td > a").each do |o|
-				    Ochiai.create(:url => "http://labola.jp#{o[:href]}")
+				    Event.create(:permalink => "http://labola.jp#{o[:href]}")
           end
         end
 		  end
     
-    items = Ochiai.find(1,2,3)
+    items = Event.all
 
     items.each do |item| 
       page_source = open(item.url)
@@ -45,15 +45,18 @@ class StaticPagesController < ApplicationController
       doc.css("table.blue_table").each do |elem|
 	      elem.css("tr:nth-child(5) > td").each do |o|
 			   	@detail.push(o.text.scan(/[\d\-]+/))
+					Event.create(:participants => @detail[0],:unoccupied_seats => @detail[1])
 					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date.push(x.text)
+						Event.create(:start_date => x.text) 
+					  #@date.push(x.text)
 						elem.css("tr:nth-child(1) > td > b").each do |y|
-							@title.push(y.text)
+							Event.create(:name => y.text)
+							#@title.push(y.text)
 						end
 		      end
 				end
 		  end
-			@url.push(item.url)
+			#@url.push(item.url)
     end
 
 		items_toshi = Toshimaen.find(1,2,3)
