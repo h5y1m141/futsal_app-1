@@ -39,16 +39,15 @@
   <th width="20%">残り</th>
 </thead>
 <tbody>
-	<% @detail.zip(@date,@url,@title).each do |item,date,url,title| %>
-		<tr><td>落合南長崎</td><td><a href='<%= url %>'><%= title %></a></td><td><%= date %></td><td><%= item[0] %></td><td><%= item[1] %></td></tr>
-	<% end %>
-  <% @detail_toshi.zip(@date_toshi,@url_toshi,@title_toshi).each do |item,date,url,title| %>
-		<tr><td>豊島園</td><td><a href='<%= url %>'><%= title %></a></td><td><%= date %></td><td><%= item[0] %></td><td><%= item[1] %></td></tr>
-	<% end %>
-  <% @detail_toshi.zip(@date_nerima,@url_nerima,@title_nerima).each do |item,date,url,title| %>
-		<tr><td>練馬</td><td><a href='<%= url %>'><%= title %></a></td><td><%= date %></td><td><%= item[0] %></td><td><%= item[1] %></td></tr>
-	<% end %>
-
+	<% @events.each_with_index do |event,i| %>
+		<tr>
+			<td><%= event.name %>
+			<td><%= event.startdate %>
+			<td><%= event.participants %>
+			<td><%= event.unoccupied_seats %>
+   </tr>
+	 break if i==2	
+  <% end %> 
 </tbody>
 </table>
 </div>
