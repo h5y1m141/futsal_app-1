@@ -13,7 +13,9 @@ class StaticPagesController < ApplicationController
 		  marker.infowindow user.description
 	  end
 
-		@events = Event.where(place_id: 1)
+		@events_ochiai = Event.where(place_id: 1)
+		@events_nerima = Event.where(place_id: 2) 
+		@events_toshimaen = Event.where(place_id: 3)
 
 	end
 
@@ -31,15 +33,15 @@ class StaticPagesController < ApplicationController
 	end
 
 	def ochiai
-		@events = Event.where(place_id: 1)
+		@events_ochiai = Event.where(place_id: 1)
 	end
     
 
 	def toshimaen
-		@events = Event.where(place_id: 2)
+		@events_toshimaen = Event.where(place_id: 2)
 	end
 
 	def nerima
-		@events = Event.where(place_id: 3)
+		@events_nerima = Event.where(place_id: 3)
 	end
 end    
