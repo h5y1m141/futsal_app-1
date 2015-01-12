@@ -12,20 +12,20 @@ require "active_record"
 #require "activerecord-import/base"
 ##require "pry"
 
-for i in 1..3
-  ochiai_url = "http://labola.jp/reserve/shop/2013/menu/personal/#{i}"
+(1..3).each do |page| 
+  ochiai_url = "http://labola.jp/reserve/shop/2013/menu/personal/#{page}"
   page_source = open(ochiai_url)
   doc = Nokogiri::HTML.parse(page_source,nil)
   doc.css("table.blue_table > tr").each do |elem|
     elem.css("td > a").each do |o|
 
-      nerima_url = "http://labola.jp/reserve/shop/785/menu/personal/#{i}"
+      nerima_url = "http://labola.jp/reserve/shop/785/menu/personal/#{page}"
       page_source = open(nerima_url)
       doc = Nokogiri::HTML.parse(page_source,nil)
       doc.css("table.blue_table > tr").each do |elem|
         elem.css("td > a").each do |n|
                         
-          toshimaen_url = "http://labola.jp/reserve/shop/880/menu/personal/#{i}"
+          toshimaen_url = "http://labola.jp/reserve/shop/880/menu/personal/#{page}"
           page_source = open(toshimaen_url)
           doc = Nokogiri::HTML.parse(page_source,nil)
           doc.css("table.blue_table > tr").each do |elem|
@@ -43,9 +43,9 @@ end
 
 
   
-tems = Page.all
+items = Page.all
 
-tems.each do |item|
+items.each do |item|
  page_source = open(item.ochiai_url)
  doc = Nokogiri::HTML.parse(page_source,nil)
  doc.css("table.blue_table").each do |elem|
@@ -82,11 +82,11 @@ tems.each do |item|
              end
            end
 
-       end
-     end
-   end
- end
-nd
+        end
+      end
+    end
+  end
+end
 
 
 Place.create([
