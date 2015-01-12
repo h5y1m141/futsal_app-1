@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110131324) do
+ActiveRecord::Schema.define(version: 20150112080341) do
 
   create_table "events", force: true do |t|
     t.integer  "place_id"
-    t.string   "permalink"
+    t.string   "place"
     t.string   "name"
     t.datetime "start_date"
     t.integer  "participants"
@@ -23,8 +23,6 @@ ActiveRecord::Schema.define(version: 20150110131324) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "events", ["permalink"], name: "index_events_on_permalink"
 
   create_table "maps", force: true do |t|
     t.string   "title"
