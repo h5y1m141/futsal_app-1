@@ -8,8 +8,13 @@
   <th width="20%">残り</th>
 </thead>
 <tbody>
-<% @detail.zip(@date,@title,@url).each do |item,day,title,url| %>
-	<tr><td><a href='<%= url %>'><%= title %></a></td><td><%= day %></td><td><%= item[0] %></td><td><%= item[1] %></td></tr>
+<% @events_toshimaen.zip(@pages_toshimaen).each do |event_toshimaen,page_toshimaen| %>
+  <tr>
+		<td><a href = '<%= page_toshimaen.toshimaen_url %>'><%= event_toshimaen.name %></a></td>
+    <td><%= event_toshimaen.start_date %></td>
+    <td><%= event_toshimaen.participants %></td>
+    <td><%= event_toshimaen.unoccupied_seats %></td>
+  </tr>
 <% end %>
 </tbody>
 </table>

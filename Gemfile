@@ -6,6 +6,7 @@ gem 'nokogiri'
 gem 'pry'
 gem "gmaps4rails"
 gem "geocoder"
+gem 'activerecord-import'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

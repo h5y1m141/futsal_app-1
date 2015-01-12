@@ -5,19 +5,6 @@ require "active_record"
 class StaticPagesController < ApplicationController
 
 	def home
-    @detail = [] 
-    @date = [] 
-    @url = [] 
-    @title = [] 
-		@detail_toshi = []
-		@date_toshi = []
-		@url_toshi = []
-		@title_toshi =[]
-		@detail_nerima =[]
-		@date_nerima = []
-		@url_nerima = []
-		@title_nerima = []
-
 
 	  @maps = Map.all
 	  @hash = Gmaps4rails.build_markers(@maps) do |user, marker|
@@ -25,78 +12,17 @@ class StaticPagesController < ApplicationController
 		  marker.lng user.longitude
 		  marker.infowindow user.description
 	  end
-		
-    	for i in 1..3
-        url = "http://labola.jp/reserve/shop/2013/menu/personal/#{i}"
-        page_source = open(url)
-        doc = Nokogiri::HTML.parse(page_source,nil)
-        doc.css("table.blue_table > tr").each do |elem|
-          elem.css("td > a").each do |o|
-				    Ochiai.create(:url => "http://labola.jp#{o[:href]}")
-          end
-        end
-		  end
-    
-    items = Ochiai.find(1,2,3)
 
-    items.each do |item| 
-      page_source = open(item.url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table").each do |elem|
-	      elem.css("tr:nth-child(5) > td").each do |o|
-			   	@detail.push(o.text.scan(/[\d\-]+/))
-					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date.push(x.text)
-						elem.css("tr:nth-child(1) > td > b").each do |y|
-							@title.push(y.text)
-						end
-		      end
-				end
-		  end
-			@url.push(item.url)
-    end
+		@events_ochiai = Event.where(place_id: 1)
+		@events_nerima = Event.where(place_id: 2) 
+		@events_toshimaen = Event.where(place_id: 3)
 
-		items_toshi = Toshimaen.find(1,2,3)
-
-    items_toshi.each do |item| 
-      page_source = open(item.url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table").each do |elem|
-	      elem.css("tr:nth-child(5) > td").each do |o|
-			   	@detail_toshi.push(o.text.scan(/[\d\-]+/))
-					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date_toshi.push(x.text)
-						elem.css("tr:nth-child(1) > td > b").each do |y|
-							@title_toshi.push(y.text)
-						end
-		      end
-				end
-		  end
-			@url_toshi.push(item.url)
-    end
-
-		items_nerima = Nerima.find(1,2,3)
-
-      items_nerima.each do |item| 
-      page_source = open(item.url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table").each do |elem|
-	      elem.css("tr:nth-child(5) > td").each do |o|
-			   	@detail_nerima.push(o.text.scan(/[\d\-]+/))
-					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date_nerima.push(x.text)
-						elem.css("tr:nth-child(1) > td > b").each do |y|
-							@title_nerima.push(y.text)
-						end
-		      end
-				end
-		  end
-			@url_nerima.push(item.url)
-    end
 	end
 
 	def place
-		@places = Place.all
+		@places_ochiai = Place.where(id: 1)
+		@places_nerima = Place.where(id: 2)
+		@places_toshimaen = Place.where(id: 3)
 	end
 
 	def about
@@ -109,83 +35,18 @@ class StaticPagesController < ApplicationController
 	end
 
 	def ochiai
-		@events = Event.where(place_id: 1)
+		@events_ochiai = Event.where(place_id: 1)
+		@pages_ochiai = Page.all
 	end
     
 
 	def toshimaen
-		@detail = [] 
-    @date = [] 
-    @url = [] 
-    @title = [] 
-    for i in 1..3
-      url = "http://labola.jp/reserve/shop/880/menu/personal/#{i}"
-      page_source = open(url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table > tr").each do |elem|
-        elem.css("td > a").each do |o|
-				  Toshimaen.create(:url => "http://labola.jp#{o[:href]}")
-				  #@array.push("http://labola.jp#{o[:href]}")
-        end
-      end
-		end
-    
-    items = Toshimaen.all
-
-    items.each do |item| 
-      page_source = open(item.url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table").each do |elem|
-	      elem.css("tr:nth-child(5) > td").each do |o|
-			   	@detail.push(o.text.scan(/[\d\-]+/))
-					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date.push(x.text)
-				    elem.css("tr:nth-child(1) > td > b").each do |y|
-						  @title.push(y.text)
-					  end
-		      end
-				end
-		  end
-		@url.push(item.url)
-   end
+		@events_toshimaen = Event.where(place_id: 2)
+		@pages_toshimaen = Page.all
 	end
 
 	def nerima
-    @detail = [] 
-    @date = [] 
-    @url = [] 
-    @title = [] 
-    for i in 1..3
-      url = "http://labola.jp/reserve/shop/785/menu/personal/#{i}"
-      page_source = open(url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table > tr").each do |elem|
-        elem.css("td > a").each do |o|
-				  Nerima.create(:url => "http://labola.jp#{o[:href]}")
-				  #@array.push("http://labola.jp#{o[:href]}")
-        end
-      end
-		end
-    
-    items = Nerima.all
-
-    items.each do |item| 
-      page_source = open(item.url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table").each do |elem|
-	      elem.css("tr:nth-child(5) > td").each do |o|
-			   	@detail.push(o.text.scan(/[\d\-]+/))
-					elem.css("tr:nth-child(2) > td").each do |x|
-					  @date.push(x.text)
-				    elem.css("tr:nth-child(1) > td > b").each do |y|
-						  @title.push(y.text)
-					  end
-		      end
-				end
-		  end
-		@url.push(item.url)
-    end
-  end
-end
-
-
+		@events_nerima = Event.where(place_id: 3)
+		@pages_nerima = Page.all
+	end
+end    
