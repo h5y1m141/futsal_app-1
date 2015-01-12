@@ -8,12 +8,12 @@
   <th width="20%">残り</th>
 </thead>
 <tbody>
-<% @events.each do |event| %>
+<% @events_toshimaen.zip(@pages_toshimaen).each do |event_toshimaen,page_toshimaen| %>
   <tr>
-    <td><%= event.name %></td>
-    <td><%= event.start_date %></td>
-    <td><%= event.participants %></td>
-    <td><%= event.unoccupied_seats %></td>
+		<td><a href = '<%= page_toshimaen.toshimaen_url %>'><%= event_toshimaen.name %></a></td>
+    <td><%= event_toshimaen.start_date %></td>
+    <td><%= event_toshimaen.participants %></td>
+    <td><%= event_toshimaen.unoccupied_seats %></td>
   </tr>
 <% end %>
 </tbody>

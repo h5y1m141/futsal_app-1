@@ -20,7 +20,9 @@ class StaticPagesController < ApplicationController
 	end
 
 	def place
-		@places = Place.all
+		@places_ochiai = Place.where(id: 1)
+		@places_nerima = Place.where(id: 2)
+		@places_toshimaen = Place.where(id: 3)
 	end
 
 	def about
@@ -34,14 +36,17 @@ class StaticPagesController < ApplicationController
 
 	def ochiai
 		@events_ochiai = Event.where(place_id: 1)
+		@pages_ochiai = Page.all
 	end
     
 
 	def toshimaen
 		@events_toshimaen = Event.where(place_id: 2)
+		@pages_toshimaen = Page.all
 	end
 
 	def nerima
 		@events_nerima = Event.where(place_id: 3)
+		@pages_nerima = Page.all
 	end
 end    

@@ -18,9 +18,9 @@
 <script type="text/javascript">
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-      markers = handler.addMarkers(<%=raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
     });
 </script>
 
@@ -30,7 +30,7 @@
 
 <div class="center hero-unit">
 <table class="table table-striped">
-<%= link_to "最新情報", '#', class: "btn btn-large btn-primary" %>
+<%= link_to "最新情報", 'place', class: "btn btn-large btn-primary" %>
 <thead>
   <th width="20%">場所</th>
 	<th width="20%">イベント名</th>
@@ -41,21 +41,21 @@
 <tbody>
 	<% @events_ochiai.zip(@events_nerima,@events_toshimaen)[0,3].each do |event_ochiai,event_nerima,event_toshimaen| %>
 		<tr>
-      <td><%= event_ochiai.spot %>
+			<td><%= link_to '落合南長崎', ochiai_path %>
 			<td><%= event_ochiai.name %>
 			<td><%= event_ochiai.start_date %>
 			<td><%= event_ochiai.participants %>
 			<td><%= event_ochiai.unoccupied_seats %>
 	 </tr>
 	 <tr>
-      <td><%= event_nerima.spot %>
+      <td><%= link_to '練馬', nerima_path %>
       <td><%= event_nerima.name %>
 			<td><%= event_nerima.start_date %>
 			<td><%= event_nerima.participants %>
 			<td><%= event_nerima.unoccupied_seats %>
 	 </tr>
 	 <tr>
-		  <td><%= event_toshimaen.spot %>
+		  <td><%= link_to '豊島園', toshimaen_path %>
       <td><%= event_toshimaen.name %>
 			<td><%= event_toshimaen.start_date %>
 			<td><%= event_toshimaen.participants %>

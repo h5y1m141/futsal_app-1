@@ -8,13 +8,25 @@
   <th width="20%">最寄り駅</th>
 </thead>
 <tbody>
-<% @places.each do |place| %>
+<% @places_ochiai.zip(@places_nerima,@places_toshimaen).each do |place_ochiai,place_nerima,place_toshimaen| %>
 	<tr>
-		<td><%= place.name %></td>
-		<td><%= place.address %></td>
-		<td><%= place.price %></td>
-		<td><%= place.description %></td>
+	  <td><%= link_to 'BONFIM Football Park 落合南長崎',ochiai_path %></td>
+		<td><%= place_ochiai.address %></td>
+		<td><%= place_ochiai.price %></td>
+		<td><%= place_ochiai.description %></td>
   </tr>
+	<tr>
+    <td><%= link_to '練馬フットボールパーク',nerima_path %></td>
+		<td><%= place_nerima.address %></td>
+		<td><%= place_nerima.price %></td>
+		<td><%= place_nerima.description %></td>
+	</tr>
+	<tr>
+    <td><%= link_to 'フィスコフットサルアレナとしまえん',toshimaen_path %></td>
+		<td><%= place_toshimaen.address %></td>
+		<td><%= place_toshimaen.price %></td>
+		<td><%= place_toshimaen.description %></td>
+	</tr>
 <% end %>
 </tbody>
 </table>

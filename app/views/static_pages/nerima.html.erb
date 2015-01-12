@@ -8,12 +8,12 @@
   <th width="20%">残り</th>
 </thead>
 <tbody>
-<% @events.each do |event| %>
+<% @events_nerima.zip(@pages_nerima).each do |event_nerima,page_nerima| %>
 	<tr>
-    <td><%= event.name %></td>
-    <td><%= event.start_date %></td>
-    <td><%= event.participants %></td>
-    <td><%= event.unoccupied_seats %></td>
+		<td><a href = '<%= page_nerima.nerima_url %>'><%= event_nerima.name %></a></td>
+    <td><%= event_nerima.start_date %></td>
+    <td><%= event_nerima.participants %></td>
+    <td><%= event_nerima.unoccupied_seats %></td>
   </tr>
 <% end %>
 </tbody>

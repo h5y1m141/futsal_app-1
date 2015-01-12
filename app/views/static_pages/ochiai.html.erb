@@ -8,12 +8,12 @@
   <th width="20%">残り</th>
 </thead>
 <tbody>
-<% @events.each do |event| %>
+<% @events_ochiai.zip(@pages_ochiai).each do |event_ochiai,page_ochiai| %>
 	<tr>
-		<td><%= event.name %></td>
-		<td><%= event.start_date %></td>
-		<td><%= event.participants %></td>
-		<td><%= event.unoccupied_seats %></td>
+		<td><a href = '<%= page_ochiai.ochiai_url %>'><%= event_ochiai.name %></a></td>
+		<td><%= event_ochiai.start_date %></td>
+		<td><%= event_ochiai.participants %></td>
+		<td><%= event_ochiai.unoccupied_seats %></td>
   </tr>
 <% end %>
 </tbody>
