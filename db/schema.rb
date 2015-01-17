@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20150112080341) do
 
   create_table "events", force: true do |t|
     t.integer  "place_id"
-    t.string   "place"
+    t.string   "spot"
     t.string   "name"
     t.datetime "start_date"
     t.integer  "participants"

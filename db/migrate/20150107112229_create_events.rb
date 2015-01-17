@@ -10,7 +10,6 @@ class CreateEvents < ActiveRecord::Migration
 
       t.timestamps
     end
-
-		add_index :events
+    add_index :events
   end
 end
