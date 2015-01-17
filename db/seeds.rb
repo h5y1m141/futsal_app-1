@@ -9,40 +9,52 @@
 require "nokogiri"
 require "open-uri"
 require "active_record"
-#require "activerecord-import/base"
-##require "pry"
+require "activerecord-import/base"
+require "pry"
 
-(1..3).each do |page| 
-  ochiai_url = "http://labola.jp/reserve/shop/2013/menu/personal/#{page}"
-  page_source = open(ochiai_url)
-  doc = Nokogiri::HTML.parse(page_source,nil)
-  doc.css("table.blue_table > tr").each do |elem|
-    elem.css("td > a").each do |o|
 
-      nerima_url = "http://labola.jp/reserve/shop/785/menu/personal/#{page}"
-      page_source = open(nerima_url)
-      doc = Nokogiri::HTML.parse(page_source,nil)
-      doc.css("table.blue_table > tr").each do |elem|
-        elem.css("td > a").each do |n|
-                        
-          toshimaen_url = "http://labola.jp/reserve/shop/880/menu/personal/#{page}"
-          page_source = open(toshimaen_url)
-          doc = Nokogiri::HTML.parse(page_source,nil)
-          doc.css("table.blue_table > tr").each do |elem|
-            elem.css("td > a").each do |t|
+def run(last_page=3)
+  (1..last_page).each do |page|
+    main_url = [
+      { name: '落合南長崎' , url: "http://labola.jp/reserve/shop/2013/menu/personal/#{page}"},
+      { name: '練馬' , url: "http://labola.jp/reserve/shop/785/menu/personal/#{page}"},
+      { name: '豊島園' , url: "http://labola.jp/reserve/shop/880/menu/personal/#{page}"}
+    ]
 
-              Page.create(ochiai_url: "http://labola.jp#{o[:href]}",nerima_url: "http://labola.jp#{n[:href]}",toshimaen_url: "http://labola.jp#{t[:href]}")
-
-            end
-          end
-        end
-      end
+    main_url.each do |main|
+      fetch_url(main[:url])
+      sleep 3
+      #persist
     end
   end
 end
 
+def fetch_url(main)
+  @url_list = []
+  @page_source = open(main)
+  doc = Nokogiri::HTML.parse(@page_source,nil)
+  doc.css("table.blue_table > tr").each do |elem|
+    elem.css("td > a").each do |o|
+      @url_list.push "http://labola.jp#{o[:href]}"
+      #puts "http://labola.jp#{o[:href]}"
+      Page.create(ochiai_url: "http://labola.jp#{o[:href]}",nerima_url: "http://labola.jp#{o[:href]}",toshimaen_url: "http://labola.jp#{o[:href]}")
+    end
+  end
+end
 
-  
+#private
+#
+#def persist
+#  pages = []
+#  @url_list.each do |page|
+#    pages << Page.new(ochiai_url: page,nerima_url: page,toshimaen_url: page)
+#  end
+#end
+
+run
+
+
+
 items = Page.all
 
 items.each do |item|
@@ -90,15 +102,15 @@ end
 
 
 Place.create([
-				 { name: "BONFIM Football Park 落合南長崎",address: "東京都豊島区南長崎4丁目5番20号　i-Terrace 5F",price: "1030円〜",description: "落合南長崎駅" },
-				 { name: "練馬フットボールパーク" ,address: "東京都練馬区田柄1-5-8",price: "1100円〜",description: "練馬春日町駅" },
-				 { name: "フィスコフットサルアレナとしまえん" ,address: "東京都練馬区向山3-25-1　としまえん屋内館",price: "1100円〜",description: "豊島園駅" }
-            ])
+  { name: "BONFIM Football Park 落合南長崎",address: "東京都豊島区南長崎4丁目5番20号　i-Terrace 5F",price: "1030円〜",description: "落合南長崎駅" },
+  { name: "練馬フットボールパーク" ,address: "東京都練馬区田柄1-5-8",price: "1100円〜",description: "練馬春日町駅" },
+  { name: "フィスコフットサルアレナとしまえん" ,address: "東京都練馬区向山3-25-1　としまえん屋内館",price: "1100円〜",description: "豊島園駅" }
+])
 
 Map.create([
-				 { title: "落合南長崎" ,description: "BONFIM Football Park 落合南長崎" ,address: "落合南長崎" ,latitude: 35.724333 ,longitude: 139.682639 },
-				 { title: "練馬",description: "練馬フットボールパーク" ,address: "練馬" ,latitude: 35.757857,longitude: 139.641941 },
-				 { title: "豊島園",description: "フィスコフットサルアレナとしまえん" ,address: "豊島園" ,latitude: 35.743331,longitude: 139.647713 }
-           ])
+  { title: "落合南長崎" ,description: "BONFIM Football Park 落合南長崎" ,address: "落合南長崎" ,latitude: 35.724333 ,longitude: 139.682639 },
+  { title: "練馬",description: "練馬フットボールパーク" ,address: "練馬" ,latitude: 35.757857,longitude: 139.641941 },
+  { title: "豊島園",description: "フィスコフットサルアレナとしまえん" ,address: "豊島園" ,latitude: 35.743331,longitude: 139.647713 }
+])
 
 
