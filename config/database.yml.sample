@@ -22,11 +22,10 @@ production:
   encoding: utf8
   adapter: postgressql
   port: 5432
-  username: hbbdihphzhnkgy
-  host: ec2-54-204-2-217.compute-1.amazonaws.com:5432
-  database: d3haa896qtlk8b
-  password: cdbY8tthObE3gB-uqG1hQ_Cnee
-
+  username: sample
+  host: sample
+  database: sample
+  password: sample
 #db:
 #  development:
 #    adapter: mysql2

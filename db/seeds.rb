@@ -10,7 +10,7 @@ require "nokogiri"
 require "open-uri"
 require "active_record"
 #require "activerecord-import/base"
-##require "pry"
+#require "pry"
 
 (1..3).each do |page|
   ochiai_url = "http://labola.jp/reserve/shop/2013/menu/personal/#{page}"
