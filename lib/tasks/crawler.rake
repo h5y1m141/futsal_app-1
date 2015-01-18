@@ -81,5 +81,20 @@ namespace :crawler do
       end
     end
 
+    class Page < ActiveRecord::Base
+      def self.sweep(time = 5.days, old = 5.days)
+        if time.is_a?(String)
+          time = time.split.inject { |count, unit| count.to_i.send(unit) }
+        end
+
+        if old.is_a?(String)
+          old = old.split.inject { |count, unit| count.to_i.send(unit) }
+        end
+
+        delete_all "updated_at < '#{time.ago.to_s(:db)}' OR created_at < '#{old.ago.to_s(:db)}'"
+      end
+      sweep
+    end
+
   end
 end
