@@ -82,7 +82,7 @@ namespace :crawler do
     end
 
     class Page < ActiveRecord::Base
-      def self.sweep(time = 5.days, old = 5.days)
+      def self.sweep(time = 5.minutes, old = 5.minutes)
         if time.is_a?(String)
           time = time.split.inject { |count, unit| count.to_i.send(unit) }
         end
