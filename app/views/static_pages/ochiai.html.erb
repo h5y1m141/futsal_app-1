@@ -10,7 +10,7 @@
 <tbody>
 <% @events_ochiai.zip(@pages_ochiai).each do |event_ochiai,page_ochiai| %>
 	<tr>
-		<td><a href = '<%= page_ochiai.ochiai_url %>'><%= event_ochiai.name %></a></td>
+    <td><a href = '<%= page_ochiai.ochiai_url %>'><%= event_ochiai.name %></a></td>
 		<td><%= event_ochiai.start_date %></td>
 		<td><%= event_ochiai.participants %></td>
 		<td><%= event_ochiai.unoccupied_seats %></td>

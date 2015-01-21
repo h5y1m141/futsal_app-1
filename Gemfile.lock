@@ -159,6 +159,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
   activerecord-import
   bootstrap-sass (= 2.3.2.0)
   capybara (= 2.1.0)

@@ -6,6 +6,7 @@ gem 'nokogiri'
 gem 'pry'
 gem "gmaps4rails"
 gem "geocoder"
+gem 'activerecord'
 gem 'activerecord-import'
 
 
