@@ -38,7 +38,6 @@ class StaticPagesController < ApplicationController
 		@events_ochiai = Event.where(place_id: 1)
 		@pages_ochiai = Page.all
 	end
-    
 
 	def toshimaen
 		@events_toshimaen = Event.where(place_id: 2)
@@ -49,4 +48,4 @@ class StaticPagesController < ApplicationController
 		@events_nerima = Event.where(place_id: 3)
 		@pages_nerima = Page.all
 	end
-end    
+end
