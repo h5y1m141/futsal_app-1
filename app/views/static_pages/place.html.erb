@@ -1,4 +1,4 @@
-<h1>コート</h1>
+<h1>フットサルコート一覧</h1>
 <div class="center hero-unit">
 <table class="table table-striped">
 <thead>
@@ -10,19 +10,19 @@
 <tbody>
 <% @places_ochiai.zip(@places_nerima,@places_toshimaen).each do |place_ochiai,place_nerima,place_toshimaen| %>
 	<tr>
-	  <td><%= link_to 'BONFIM Football Park 落合南長崎',ochiai_path %></td>
+	  <td><%= link_to 'BONFIM Football Park 落合南長崎',place_ochiai_path %></td>
 		<td><%= place_ochiai.address %></td>
 		<td><%= place_ochiai.price %></td>
 		<td><%= place_ochiai.description %></td>
   </tr>
 	<tr>
-    <td><%= link_to '練馬フットボールパーク',nerima_path %></td>
+    <td><%= link_to '練馬フットボールパーク',place_nerima_path %></td>
 		<td><%= place_nerima.address %></td>
 		<td><%= place_nerima.price %></td>
 		<td><%= place_nerima.description %></td>
 	</tr>
 	<tr>
-    <td><%= link_to 'フィスコフットサルアレナとしまえん',toshimaen_path %></td>
+    <td><%= link_to 'フィスコフットサルアレナとしまえん',place_toshimaen_path %></td>
 		<td><%= place_toshimaen.address %></td>
 		<td><%= place_toshimaen.price %></td>
 		<td><%= place_toshimaen.description %></td>

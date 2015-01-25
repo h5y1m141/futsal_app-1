@@ -14,7 +14,7 @@ class StaticPagesController < ApplicationController
 	  end
 
 		@events_ochiai = Event.where(place_id: 1)
-		@events_nerima = Event.where(place_id: 2) 
+		@events_nerima = Event.where(place_id: 2)
 		@events_toshimaen = Event.where(place_id: 3)
 
 	end
